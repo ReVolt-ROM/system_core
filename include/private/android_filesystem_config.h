@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2007 The Android Open Source Project
+ * Copyright (C) 2013 ParanoidAndroid Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -245,6 +246,7 @@ static const struct fs_path_config android_files[] = {
     { 00550, AID_DHCP,      AID_SHELL,     0, "system/etc/dhcpcd/dhcpcd-run-hooks" },
     { 00755, AID_ROOT,      AID_ROOT,      0, "system/addon.d/*" },
     { 00444, AID_RADIO,     AID_AUDIO,     0, "system/etc/AudioPara4.csv" },
+    { 00644, AID_SYSTEM,    AID_SYSTEM,    "system/etc/paranoid/properties.conf" },
     { 00555, AID_ROOT,      AID_ROOT,      0, "system/etc/ppp/*" },
     { 00555, AID_ROOT,      AID_ROOT,      0, "system/etc/rc.*" },
     { 00644, AID_SYSTEM,    AID_SYSTEM,    0, "data/app/*" },
