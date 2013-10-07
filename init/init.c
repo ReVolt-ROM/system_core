@@ -738,6 +738,7 @@ static void import_kernel_nv(char *name, int for_emulator)
         if (!strcmp(value, "0x1a2b3c10")) {
             property_set("ro.boot.mode", "charger");
         }
+#endif
 #ifdef HAS_SEMC_BOOTLOADER
     } else if (!strcmp(name,"serialno")) {
         property_set("ro.boot.serialno", value);
