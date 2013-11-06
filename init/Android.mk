@@ -10,7 +10,6 @@ LOCAL_SRC_FILES:= \
 	property_service.c \
 	util.c \
 	parser.c \
-	logo.c \
 	keychords.c \
 	signal_handler.c \
 	init_parser.c \
@@ -27,7 +26,26 @@ ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
 LOCAL_CFLAGS += -DALLOW_LOCAL_PROP_OVERRIDE=1
 endif
 
-SYSTEM_CORE_INIT_DEFINES := BOARD_CHARGING_MODE_BOOTING_LPM
+ifneq ($(TARGET_NO_INITLOGO),true)
+LOCAL_SRC_FILES += logo.c
+LOCAL_CFLAGS    += -DINITLOGO
+endif
+
+ifneq ($(TARGET_NR_SVC_SUPP_GIDS),)
+LOCAL_CFLAGS += -DNR_SVC_SUPP_GIDS=$(TARGET_NR_SVC_SUPP_GIDS)
+endif
+
+ifeq ($(BOARD_WANTS_EMMC_BOOT),true)
+LOCAL_CFLAGS += -DWANTS_EMMC_BOOT
+endif
+
+ifeq ($(BOARD_USE_NO_DEVFS_SETUP),true)
+LOCAL_CFLAGS += -DNO_DEVFS_SETUP
+endif
+
+SYSTEM_CORE_INIT_DEFINES := BOARD_CHARGING_MODE_BOOTING_LPM \
+    BOARD_CHARGING_CMDLINE_NAME \
+    BOARD_CHARGING_CMDLINE_VALUE
 
 $(foreach system_core_init_define,$(SYSTEM_CORE_INIT_DEFINES), \
   $(if $($(system_core_init_define)), \
