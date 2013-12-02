@@ -83,6 +83,7 @@ struct {
     { "sys.",             AID_SYSTEM,   0 },
     { "sys.powerctl",     AID_SHELL,    0 },
     { "service.",         AID_SYSTEM,   0 },
+    { "service.",         AID_RADIO,    0 },
     { "wlan.",            AID_SYSTEM,   0 },
     { "bluetooth.",       AID_BLUETOOTH,   0 },
     { "dhcp.",            AID_SYSTEM,   0 },
@@ -145,6 +146,13 @@ static int init_workspace(workspace *w, size_t size)
     w->fd = fd;
     return 0;
 }
+
+/* (8 header words + 496 toc words) = 2016 bytes */
+/* 2048 bytes header and toc + 496 prop_infos @ 128 bytes = 65536 bytes */
+
+#define PA_COUNT_MAX  496
+#define PA_INFO_START 2048
+#define PA_SIZE       65536
 
 static workspace pa_workspace;
 

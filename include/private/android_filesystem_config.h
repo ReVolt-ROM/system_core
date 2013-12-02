@@ -77,6 +77,8 @@
 #define AID_SDCARD_AV     1034  /* external storage audio/video access */
 #define AID_SDCARD_ALL    1035  /* access all users external storage */
 #define AID_AUDIT         1036  /* audit daemon */
+#define AID_FM_RADIO      1037  /* FM radio */
+#define AID_SMARTCARD     1138  /* smart card subsystem */
 
 #define AID_THEMEMAN      1300  /* theme manager */
 
@@ -206,8 +208,22 @@ static const struct android_id_info android_ids[] = {
 
     { "misc",          AID_MISC, },
     { "nobody",        AID_NOBODY, },
-    { "theme_man", AID_THEMEMAN },
-    { "audit",      AID_AUDIT, },
+
+#if defined(MOTOROLA_UIDS)
+    { "mot_osh",   AID_MOT_OSH, },
+    { "mot_accy",  AID_MOT_ACCY, },
+    { "mot_pwric", AID_MOT_PWRIC, },
+    { "mot_usb",   AID_MOT_USB, },
+    { "mot_drm",   AID_MOT_DRM, },
+    { "mot_tcmd",  AID_MOT_TCMD, },
+    { "mot_sec_rtc",   AID_MOT_SEC_RTC, },
+    { "mot_tombstone", AID_MOT_TOMBSTONE, },
+    { "mot_tpapi",     AID_MOT_TPAPI, },
+    { "mot_secclkd",   AID_MOT_SECCLKD, },
+    { "mot_whisper",   AID_MOT_WHISPER, },
+    { "mot_caif",  AID_MOT_CAIF, },
+    { "mot_dlna",  AID_MOT_DLNA, },
+#endif
 };
 
 #define android_id_count \
@@ -286,6 +302,7 @@ static const struct fs_path_config android_files[] = {
     { 06755, AID_ROOT,      AID_ROOT,      0, "system/xbin/procmem" },
     { 06755, AID_ROOT,      AID_ROOT,      0, "system/xbin/tcpdump" },
     { 04770, AID_ROOT,      AID_RADIO,     0, "system/bin/pppd-ril" },
+    { 06750, AID_ROOT,      AID_SYSTEM,    0, "system/bin/rebootcmd" },
 
     /* the following files have enhanced capabilities and ARE included in user builds. */
     { 00750, AID_ROOT,      AID_SHELL,     (1 << CAP_SETUID) | (1 << CAP_SETGID), "system/bin/run-as" },
